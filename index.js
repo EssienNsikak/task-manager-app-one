@@ -5,6 +5,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import taskRoutes from './routes/taskRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 
@@ -17,19 +19,10 @@ app.use(express.json());
 
 dotenv.config();
 
-app.use('/api/v1/tasks', taskRoutes);
+app.use('/api/v1', taskRoutes);
+app.use('/api/v1', authRoutes);
+app.use('/api/v1', userRoutes);
 
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  return next();
-});
 
 const MONGO_URL = process.env.MONGO_URL
 mongoose

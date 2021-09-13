@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
-const TaskSchema = mongoose.Schema(
+const TaskSchema = new mongoose.Schema(
   {
     title: {
       type: String,
